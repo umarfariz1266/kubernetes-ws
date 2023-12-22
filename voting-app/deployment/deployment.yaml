@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: angular-service
+spec:
+  selector:
+    app: angular-voting-app
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-dep-voting-app
+  labels:
+    app: angular-voting-app
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: angular-voting-app
+      labels:
+        app: angular-voting-app
+    spec:
+      containers:
+        - name: angular-voting-app
+          image: umarfariz1266/voting_app_angular_frontend:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "5m"
+            limits:
+              memory: "1Gi"
+              cpu: "5m"
+      priorityClassName: priority-class
+  selector:
+    matchLabels:
+      app: angular-voting-app
+
