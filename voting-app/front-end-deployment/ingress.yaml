@@ -38,10 +38,3 @@ spec:
                 name: dashboard-kubernetes-dashboard
                 port:
                   number: 80
-          - pathType: Prefix
-            path: /argo
-            backend:
-              service:
-                name: argocd-server
-                port:
-                  number: 80
