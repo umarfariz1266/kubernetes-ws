@@ -19,7 +19,7 @@ metadata:
   labels:
     app: angular-voting-app
 spec:
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       name: angular-voting-app
