@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dbservice
+  name: postgresql
   labels:
     app: voting-app
     type: db
@@ -35,7 +35,7 @@ spec:
     spec:
       priorityClassName: db-priority
       containers:
-        - name: postgres-db
+        - name: postgresql
           image: postgres:latest
           imagePullPolicy: IfNotPresent
           env:
@@ -61,7 +61,7 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: db-volume
-  serviceName: "dbservice"
+  serviceName: "postgresql"
   replicas: 3
   volumeClaimTemplates:
     - metadata:
