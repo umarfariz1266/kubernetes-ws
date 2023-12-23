@@ -9,5 +9,5 @@ data:
   DB_USER_NAME: "postgres"
   DB_PASSWORD: "postgres"
   DB_URL: "postgresql"  # Database type
-  DB_HOST: "db-headless-service"  # Kubernetes service name or pod IP
+  DB_HOST: "dbservice"  # Kubernetes service name or pod IP
   DB_PORT: "5432"       # PostgreSQL default port

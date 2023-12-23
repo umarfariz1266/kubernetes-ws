@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: java-springboot-backned
+  name: java-springboot-backend
   labels:
     app: voting-app
     type: backend
