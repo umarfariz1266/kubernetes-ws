@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: angular-voting-app
-          image: umarfariz1266/voting_app_angular_frontend:latest
+          image: dockersamples/examplevotingapp_vote
           ports:
             - containerPort: 80
           resources:
