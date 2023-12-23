@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-headless-service
+  labels:
+    app: voting-app
+    type: db
+spec:
+  ports:
+      - port: 5432
+        protocol: TCP
+
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-deployment
+  labels:
+    app: voting-app
+    type: db
+spec:
+  selector:
+    matchLabels:
+      app: voting-app
+      type: db
+  template:
+    metadata:
+      name: db-pod
+      labels:
+        app: voting-app
+        type: db
+    spec:
+      priorityClassName: db-priority
+      containers:
+        - name: postgres-db
+          image: postgres:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_NAME
+
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_USER_NAME
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_PASSWORD
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /data
+              name: db-volume
+  serviceName: "db-headless-service"
+  replicas: 3
+  volumeClaimTemplates:
+    - metadata:
+        name: db-volume
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100M

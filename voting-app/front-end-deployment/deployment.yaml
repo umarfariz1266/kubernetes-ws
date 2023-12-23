@@ -9,6 +9,7 @@ spec:
     - port: 80
       targetPort: 80
       protocol: TCP
+  type: LoadBalancer
 
 ---
 
@@ -19,7 +20,7 @@ metadata:
   labels:
     app: angular-voting-app
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       name: angular-voting-app
