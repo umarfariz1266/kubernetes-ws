@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-springboot-backned
+  labels:
+    app: voting-app
+    type: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: voting-app
+      type: backend
+  template:
+    metadata:
+      name: java-springboot
+      labels:
+        app: voting-app
+        type: backend
+    spec:
+      containers:
+        - name: java-spring-boot
+          imagePullPolicy: Always
+          image: umarfariz1266/voting_app_backend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_URL
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_PORT
+
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_NAME
+
+            - name: DB_USER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_USER_NAME
+
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_PASSWORD
+
+      priorityClassName: back-end-policy
