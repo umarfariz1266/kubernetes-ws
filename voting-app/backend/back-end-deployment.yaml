@@ -6,7 +6,7 @@ metadata:
     app: voting-app
     type: backend
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: voting-app
