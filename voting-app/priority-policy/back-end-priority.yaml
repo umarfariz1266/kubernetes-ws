@@ -2,6 +2,7 @@ apiVersion: scheduling.k8s.io/v1
 kind: PriorityClass
 metadata:
   name: back-end-policy
+  namespace: voting-app
 preemptionPolicy: Never
 value: 999
 globalDefault: false

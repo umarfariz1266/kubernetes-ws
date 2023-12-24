@@ -2,6 +2,7 @@ apiVersion: scheduling.k8s.io/v1
 kind: PriorityClass
 metadata:
   name: priority-class
+  namespace: voting-app
 globalDefault: false
 value: 1000
 description: priority for angular application
