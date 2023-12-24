@@ -19,6 +19,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: db-deployment
+  namespace: voting-app
   labels:
     app: voting-app
     type: db

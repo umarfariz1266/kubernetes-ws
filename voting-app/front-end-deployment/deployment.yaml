@@ -18,6 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: angular-dep-voting-app
+  namespace: voting-app
   labels:
     app: angular-voting-app
 spec:
