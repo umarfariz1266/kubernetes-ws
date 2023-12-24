@@ -30,7 +30,7 @@ spec:
         app: angular-voting-app
     spec:
       containers:
-        - name: angular-voting-app
+        - name: vote
           image: dockersamples/examplevotingapp_vote
           ports:
             - containerPort: 80
